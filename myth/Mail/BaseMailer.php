@@ -267,6 +267,10 @@ class BaseMailer {
             return;
         }
 
+        if (!$this->service instanceof MailServiceInterface) {
+            throw new \RuntimeException("Mail service must be implemented at MailServiceInterface");
+        }
+
         $service_name = ! empty($this->service_name) ? $this->service_name : config_item('mail.default_service');
 
         if (! class_exists($service_name))
